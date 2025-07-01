@@ -42,6 +42,29 @@ function Gallery(props) {
   );
 }
 
+function Form(props) {
+  function  handleSubmit(event) {
+    event.preventDefault();
+    const { breed } = event.target.elements;
+    props.onFormSubmit(breed.value);
+  }
+  return (
+    <div>
+      <form onSubmit={handleSubmit}>
+        <select name="breed" defaultValue="shiba">
+          <option value="shiba">Shiba</option>
+          <option value="akita">Akita</option>
+        </select>
+        <div>
+          <button type="submit">
+            Reload
+          </button>
+        </div>
+      </form>
+    </div>
+  );
+}
+
 function Main() {
   const [urls, setUrls] = useState(null);
   useEffect(() => {
@@ -50,8 +73,18 @@ function Main() {
       setUrls(urls);
     });
   },[]);
+  function reloadImages(breed) {
+    fetchImages(breed).then((urls) => {
+      setUrls(urls);
+    });
+  }
   return (
     <main>
+      <section>
+        <div>
+          <Form onFormSubmit={reloadImages} />
+        </div>
+      </section>
       <section>
         <Gallery src={urls} />
       </section>
