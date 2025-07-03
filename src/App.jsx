@@ -6,8 +6,8 @@ function Header() {
     <div>
       <header className="hero is-dark is-small">
         <div className="hero-body">
-          <div className="title">
-            <h1>What dog breed is this picture?</h1>
+          <div  className="container">
+            <h1 className="title">What dog breed is this picture?</h1>
           </div>
         </div>
       </header>
@@ -17,17 +17,19 @@ function Header() {
 
 function Image(props) {
   return (
-    <div>
-      <figure className="image is128x128">
-        <img src={props.src} alt="cute dog!" />
-      </figure>
+    <div className="card">
+      <div className="card-image">
+        <figure className="image">
+          <img src={props.src} alt="cute dog!" />
+        </figure>
+      </div>
     </div>
   )
 }
 
 function Loading() {
   return (
-    <div>
+    <div className="section">
       <p>Loading...</p>
     </div>
   );
@@ -38,10 +40,10 @@ function Gallery(props) {
     return <Loading />;
   }
   return (
-    <div>
+    <div className="columns is-vcentered is-multiline">
       {props.src.map(url => {
         return (
-          <div key={url} >
+          <div key={url} className="column is-3">
             <Image src={url} />
           </div>
         );
@@ -59,14 +61,20 @@ function Form(props) {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <select name="breed" defaultValue="shiba">
-          <option value="shiba">Shiba</option>
-          <option value="akita">Akita</option>
-        </select>
-        <div>
-          <button type="submit">
-            Reload
-          </button>
+        <div className="field has-addons">
+          <div className="control is-expanded">
+            <div className="select is-fullwidth">
+              <select name="breed" defaultValue="shiba">
+                <option value="shiba">Shiba</option>
+                <option value="akita">Akita</option>
+              </select>
+            </div>
+          </div>
+          <div className="control">
+            <button type="submit" className="button is-dark">
+              Reload
+            </button>
+          </div>
         </div>
       </form>
     </div>
@@ -89,7 +97,7 @@ function Main() {
   return (
     <main>
       <section className="section">
-        <div>
+        <div className="container">
           <Form onFormSubmit={reloadImages} />
         </div>
       </section>
