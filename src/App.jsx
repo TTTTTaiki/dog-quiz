@@ -7,7 +7,7 @@ function Header() {
       <header className="hero is-dark is-small">
         <div className="hero-body">
           <div  className="container">
-            <h1 className="title">What dog breed is this picture?</h1>
+            <h1 className="title">このイッヌの犬種は何でしょう？</h1>
           </div>
         </div>
       </header>
@@ -40,10 +40,10 @@ function Gallery(props) {
     return <Loading />;
   }
   return (
-    <div className="columns is-vcentered is-multiline">
+    <div className="columns is-centered">
       {props.src.map(url => {
         return (
-          <div key={url} className="column is-3">
+          <div key={url} className="column is-half">
             <Image src={url} />
           </div>
         );
@@ -67,6 +67,7 @@ function Form(props) {
               <select name="breed" defaultValue="shiba">
                 <option value="shiba">Shiba</option>
                 <option value="akita">Akita</option>
+                <option value="appenzeller">Appenzeller</option>
               </select>
             </div>
           </div>
@@ -94,6 +95,14 @@ function Main() {
       setUrls(urls);
     });
   }
+  const breeds = [
+    "Affenpinscher",
+    "African",
+    "Airedale",
+    "Akita",
+    "Appenzeller",
+    "Kelpie Australian"
+  ];
   return (
     <main>
       <section className="section">
