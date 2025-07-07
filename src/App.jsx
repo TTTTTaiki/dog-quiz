@@ -56,6 +56,7 @@ function Form(props) {
   function  handleSubmit(event) {
     event.preventDefault();
     const { breed } = event.target.elements;
+    console.log(breed);
     props.onFormSubmit(breed.value);
   }
   return (
@@ -74,6 +75,41 @@ function Form(props) {
           <div className="control">
             <button type="submit" className="button is-dark">
               Reload
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  );
+}
+
+function Quiz(props) {
+  function checkAnswer(event) {
+    event.preventDefault();
+    const { answerBreed } = event.target.elements;
+    console.log(event.target.elements);
+    console.log(answerBreed.value);
+    props.onFormSubmit(answerBreed.value);
+    // if (answerBreed.value.equals("")) {
+    // } else {
+    // }
+  }
+  return (
+    <div>
+      <form onSubmit={checkAnswer}>
+        <div className="field has-addons">
+          <div className="control is-expanded">
+            <div className="select is-fullwidth">
+              <select name="answerBreed" defaultValue="shiba">
+                <option value="shiba">Shiba</option>
+                <option value="akita">Akita</option>
+                <option value="appenzeller">Appenzeller</option>
+              </select>
+            </div>
+          </div>
+          <div className="control">
+            <button type="submit" className="button is-dark">
+              Answer
             </button>
           </div>
         </div>
@@ -108,6 +144,11 @@ function Main() {
       <section className="section">
         <div className="container">
           <Form onFormSubmit={reloadImages} />
+        </div>
+      </section>
+      <section className="section">
+        <div className="container">
+          <Quiz onFormSubmit={reloadImages} />
         </div>
       </section>
       <section className="section">
